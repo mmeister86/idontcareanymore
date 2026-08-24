@@ -2,6 +2,7 @@
 import "@/styles/global.css"
 import { SITE } from "@/site.config"
 import Analytics from "@vercel/analytics/astro"
+import SpeedInsights from "@vercel/speed-insights/astro"
 ---
 
 <html lang="en">
@@ -23,5 +24,6 @@ import Analytics from "@vercel/analytics/astro"
   <body>
     <slot />
     <Analytics />
+    <SpeedInsights />
   </body>
 </html>
