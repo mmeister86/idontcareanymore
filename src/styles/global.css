@@ -1,57 +1,31 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
 html {
-  background: #c8c8c8;
-  color: #4a4a4a;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 1.5rem;
-  box-sizing: border-box;
-  cursor: default;
-  text-align: center;
+  background-color: var(--color-zinc-950);
+  color: var(--color-zinc-300);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-main {
-  max-width: 32rem;
+::selection {
+  background: var(--color-zinc-700);
+  color: var(--color-zinc-100);
 }
 
-h1 {
-  font-size: 1.4rem;
-  font-weight: normal;
-  margin: 0 0 1.5rem;
+summary {
+  list-style: none;
 }
 
-p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin: 0 0 1.25rem;
-}
-
-a {
-  color: #0000cc;
-  text-decoration: underline;
-}
-
-.kaomoji {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 2.2rem;
-  color: #5a5a5a;
-  white-space: nowrap;
-}
-
-.mono {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.85rem;
-  color: #6e6e6e;
-}
-
-footer {
-  margin-top: 4rem;
-  font-size: 0.8rem;
-  color: #7d7d7d;
+summary::-webkit-details-marker {
+  display: none;
 }

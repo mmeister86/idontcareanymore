@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css"
+import { SITE } from "@/site.config"
 ---
 
 <html lang="en">
@@ -7,8 +8,16 @@ import "@/styles/global.css"
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="description" content="a link. that's it." />
-    <title>idontcareanymore.lol</title>
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#09090b" />
+    <meta
+      name="description"
+      content="One link. Zero features. Infinite scalability. Send money or don't."
+    />
+    <meta property="og:title" content={`${SITE.brand}${SITE.tld}`} />
+    <meta property="og:description" content={SITE.tagline} />
+    <meta property="og:type" content="website" />
+    <title>{SITE.brand}{SITE.tld} — {SITE.tagline}</title>
   </head>
   <body>
     <slot />
