@@ -1,17 +1,44 @@
 ---
 import Layout from "@/layouts/main.astro"
-import { Button } from "@/components/ui/button"
+import { SITE } from "@/site.config"
 ---
 
 <Layout>
-  <div class="flex min-h-svh p-6">
-    <div class="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-      <div>
-        <h1 class="font-medium">Project ready!</h1>
-        <p>You may now add components and start building.</p>
-        <p>We've already added the button component for you.</p>
-        <Button client:load className="mt-2">Button</Button>
-      </div>
-    </div>
-  </div>
+  <main>
+    <div class="kaomoji" aria-hidden="true">{SITE.kaomoji}</div>
+    <h1>{SITE.title}</h1>
+    {SITE.paragraphs.map((p) => <p>{p}</p>)}
+    <p><a href={SITE.paypalUrl} rel="noopener">{SITE.paypalLabel}</a></p>
+    <p
+      id="timer"
+      class="mono"
+      data-template={SITE.timerTemplate}
+    >
+      {SITE.timerTemplate.replace("{t}", SITE.timerInitial)}
+    </p>
+    <footer>{SITE.footer}</footer>
+  </main>
 </Layout>
+
+<script>
+  const el = document.getElementById("timer")
+  const template = el?.dataset.template
+
+  function format(duration: number): string {
+    if (duration < 60) {
+      return `${duration} second${duration === 1 ? "" : "s"}`
+    }
+    const minutes = Math.floor(duration / 60)
+    return `${minutes} minute${minutes === 1 ? "" : "s"}`
+  }
+
+  if (el && template) {
+    const start = Date.now()
+    const update = () => {
+      const seconds = Math.floor((Date.now() - start) / 1000)
+      el.textContent = template.replace("{t}", format(seconds))
+    }
+    update()
+    setInterval(update, 1000)
+  }
+</script>
