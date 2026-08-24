@@ -29,6 +29,7 @@ const paypal = (href: string) => (href === "PAYPAL" ? SITE.paypalUrl : href)
         <a
           href={SITE.paypalUrl}
           rel="noopener"
+          data-cta="nav"
           class="rounded-full bg-indigo-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-400"
         >
           {SITE.nav.cta}
@@ -72,6 +73,7 @@ const paypal = (href: string) => (href === "PAYPAL" ? SITE.paypalUrl : href)
           <a
             href={SITE.paypalUrl}
             rel="noopener"
+            data-cta="hero"
             class="rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:bg-indigo-400"
           >
             {SITE.hero.ctaPrimary}
@@ -245,6 +247,7 @@ const paypal = (href: string) => (href === "PAYPAL" ? SITE.paypalUrl : href)
                 <a
                   href={paypal(tier.href)}
                   rel="noopener"
+                  data-cta={`pricing-${tier.name.toLowerCase()}`}
                   class:list={[
                     "mt-8 rounded-full px-4 py-2.5 text-center text-sm font-semibold transition",
                     tier.highlight
@@ -325,6 +328,7 @@ const paypal = (href: string) => (href === "PAYPAL" ? SITE.paypalUrl : href)
             <a
               href={SITE.paypalUrl}
               rel="noopener"
+              data-cta="final"
               class="mt-8 inline-block rounded-full bg-indigo-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:bg-indigo-400"
             >
               {SITE.finalCta.button}
@@ -387,6 +391,16 @@ const paypal = (href: string) => (href === "PAYPAL" ? SITE.paypalUrl : href)
 </Layout>
 
 <script>
+  import { track } from "@vercel/analytics"
+
+  document
+    .querySelectorAll<HTMLAnchorElement>("a[data-cta]")
+    .forEach((link) => {
+      link.addEventListener("click", () => {
+        track("paypal_click", { location: link.dataset.cta ?? "unknown" })
+      })
+    })
+
   const el = document.getElementById("timer")
   const template = el?.dataset.template
 
